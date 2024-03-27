@@ -207,20 +207,21 @@ class ProxyFetcher(object):
     #         for proxy in proxies:
     #             yield ':'.join(proxy)
 
-    # @staticmethod
-    # def freeProxy11():
-    #     """
-    #     https://proxy-list.org/english/index.php
-    #     :return:
-    #     """
-    #     urls = ['https://proxy-list.org/english/index.php?p=%s' % n for n in range(1, 10)]
-    #     request = WebRequest()
-    #     import base64
-    #     for url in urls:
-    #         r = request.get(url, timeout=10)
-    #         proxies = re.findall(r"Proxy\('(.*?)'\)", r.text)
-    #         for proxy in proxies:
-    #             yield base64.b64decode(proxy).decode()
+    @staticmethod
+    def freeProxy12():
+        """
+        https://proxy-list.org/english/index.php
+        :return:
+        """
+        #urls = ['https://proxy-list.org/english/index.php?p=%s' % n for n in range(1, 10)]
+        urls = ['https://proxy-list.org/english/search.php?search=&country=CN&type=any&port=any&ssl=any&p=%s' % n for n in range(1,5)]    
+        request = WebRequest()
+        import base64
+        for url in urls:
+            r = request.get(url, timeout=10)
+            proxies = re.findall(r"Proxy\('(.*?)'\)", r.text)
+            for proxy in proxies:
+                yield base64.b64decode(proxy).decode()
 
     # @staticmethod
     # def freeProxy12():
@@ -232,6 +233,18 @@ class ProxyFetcher(object):
     #         for proxy in proxies:
     #             yield ':'.join(proxy)
 
+    @staticmethod
+    def freeProxy13():
+        """
+        墙外网站 proxyscrape
+        仅获取CN
+        """
+        url = 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=cn&ssl=all&anonymity=all'
+        response = WebRequest().get(url)
+        response = response.text
+        proxies = response.split('\r\n')
+        for proxy in proxies:
+            yield proxy
 
 if __name__ == '__main__':
     p = ProxyFetcher()
