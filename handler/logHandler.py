@@ -34,11 +34,11 @@ CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_PATH = os.path.join(CURRENT_PATH, os.pardir)
 LOG_PATH = os.path.join(ROOT_PATH, 'log')
 
-if not os.path.exists(LOG_PATH):
-    try:
-        os.mkdir(LOG_PATH)
-    except FileExistsError:
-        pass
+# if not os.path.exists(LOG_PATH):
+#     try:
+#         os.mkdir(LOG_PATH)
+#     except FileExistsError:
+#         pass
 
 
 class LogHandler(logging.Logger):
@@ -46,7 +46,7 @@ class LogHandler(logging.Logger):
     LogHandler
     """
 
-    def __init__(self, name, level=DEBUG, stream=True, file=True):
+    def __init__(self, name, level=DEBUG, stream=True, file=False):
         self.name = name
         self.level = level
         logging.Logger.__init__(self, self.name, level=level)

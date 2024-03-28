@@ -33,12 +33,18 @@ HOST = "0.0.0.0"
 
 PORT = 5010
 
+# ############### redis config ###############
+import os
+REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD")
+REDIS_HOST = os.environ.get("REDIS_HOST")
+REDIS_PORT = os.environ.get("REDIS_PORT")
+
 # ############### database config ###################
 # db connection uri
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:pwd@:127.0.0.1:6379/0'
+DB_CONN = 'redis://:{}@{}:{}/0'.format(REDIS_PASSWORD,REDIS_HOST,REDIS_PORT)
 
 # proxy table name
 TABLE_NAME = 'use_proxy'

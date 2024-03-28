@@ -20,7 +20,7 @@ from handler.logHandler import LogHandler
 from random import choice
 from redis import Redis
 import json
-
+from redis import StrictRedis
 
 class RedisClient(object):
     """
@@ -46,6 +46,7 @@ class RedisClient(object):
                                                                    timeout=5,
                                                                    socket_timeout=5,
                                                                    **kwargs))
+        # self.__conn = StrictRedis(**kwargs, ssl=True)
 
     def get(self, https):
         """
