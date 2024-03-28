@@ -1,5 +1,8 @@
 {
     "version": 2,
+    "engines": {
+        "node": "18.x"
+      },
     "builds": [
       {
         "src": "main.py",
@@ -12,7 +15,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "main.py"
+        "dest": "api/proxyApi.py"
       }
     ]
   }
