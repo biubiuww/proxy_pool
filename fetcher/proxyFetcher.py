@@ -246,7 +246,22 @@ class ProxyFetcher(object):
         for proxy in proxies:
             yield proxy
 
-
+    @staticmethod
+    def freeProxy14():
+        """
+        仅获取CN
+        """
+        from lxml import etree
+        url = 'https://www.freeproxy.world/?type=http&anonymity=&country=CN&speed=&port=&page=1'
+        response = WebRequest().get(url)
+        tree = etree.HTML(response.text)
+        for tr in tree.xpath('//tr'):
+            try:
+                ip = tr.xpath('./td[1]/text()')[0].strip()
+                port = tr.xpath('./td[2]/a/text()')[0]
+                yield "%s:%s" % (ip, port)
+            except Exception as e:
+                pass
 
 if __name__ == '__main__':
     p = ProxyFetcher()
