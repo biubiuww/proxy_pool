@@ -58,15 +58,18 @@ def index():
 
 @app.route('/get/')
 def get():
-    https = request.args.get("type", "").lower() == 'https'
-    proxy = proxy_handler.get(https)
+    # https = request.args.get("type", "").lower() == 'https'
+    # proxy = proxy_handler.get(https)
+
+    proxy = proxy_handler.get()
     return proxy.to_dict if proxy else {"code": 0, "src": "no proxy"}
 
 
 @app.route('/pop/')
 def pop():
-    https = request.args.get("type", "").lower() == 'https'
-    proxy = proxy_handler.pop(https)
+    # https = request.args.get("type", "").lower() == 'https'
+    # proxy = proxy_handler.pop(https)
+    proxy = proxy_handler.pop()
     return proxy.to_dict if proxy else {"code": 0, "src": "no proxy"}
 
 
@@ -78,8 +81,8 @@ def refresh():
 
 @app.route('/all/')
 def getAll():
-    https = request.args.get("type", "").lower() == 'https'
-    proxies = proxy_handler.getAll(https)
+    # https = request.args.get("type", "").lower() == 'https'
+    proxies = proxy_handler.getAll()
     return jsonify([_.to_dict for _ in proxies])
 
 
@@ -93,14 +96,20 @@ def delete():
 @app.route('/count/')
 def getCount():
     proxies = proxy_handler.getAll()
-    http_type_dict = {}
     source_dict = {}
     for proxy in proxies:
-        http_type = 'https' if proxy.https else 'http'
-        http_type_dict[http_type] = http_type_dict.get(http_type, 0) + 1
         for source in proxy.source.split('/'):
             source_dict[source] = source_dict.get(source, 0) + 1
-    return {"http_type": http_type_dict, "source": source_dict, "count": len(proxies)}
+    return  {"count": len(proxies), "source":source_dict}
+    # proxies = proxy_handler.getAll()
+    # http_type_dict = {}
+    # source_dict = {}
+    # for proxy in proxies:
+    #     http_type = 'https' if proxy.https else 'http'
+    #     http_type_dict[http_type] = http_type_dict.get(http_type, 0) + 1
+    #     for source in proxy.source.split('/'):
+    #         source_dict[source] = source_dict.get(source, 0) + 1
+    # return {"http_type": http_type_dict, "source": source_dict, "count": len(proxies)}
 
 
 def runFlask():

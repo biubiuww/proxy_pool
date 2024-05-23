@@ -69,6 +69,7 @@ class WebRequest(object):
         :param timeout: network timeout
         :return:
         """
+
         headers = self.header
         if header and isinstance(header, dict):
             headers.update(header)
