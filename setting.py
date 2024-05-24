@@ -52,9 +52,14 @@ TABLE_NAME = 'use_proxy'
 
 # ###### config the proxy fetch function ######
 PROXY_FETCHER = [
-    #"freeProxy01",
     "freeSocks01",
-    "freeSocks02"
+    "freeSocks02",
+    "freeSocks03",
+    "freeSocks04",
+   #  "freeLocalhost"
+   "freeSocks05",
+   "freeSocks06",
+   "freeSocks07"
 ]
 
 # ############# proxy validator #################
@@ -64,10 +69,10 @@ HTTP_URL = "http://httpbin.org"
 HTTPS_URL = "https://www.qq.com"
 
 # 代理验证时超时时间
-VERIFY_TIMEOUT = 10
+VERIFY_TIMEOUT = 15
 
 # 近PROXY_CHECK_COUNT次校验中允许的最大失败次数,超过则剔除代理
-MAX_FAIL_COUNT = 0
+MAX_FAIL_COUNT = 3
 
 # 近PROXY_CHECK_COUNT次校验中允许的最大失败率,超过则剔除代理
 # MAX_FAIL_RATE = 0.1

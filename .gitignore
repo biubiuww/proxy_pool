@@ -4,3 +4,4 @@ docs/_build
 *.log
 .venv/
 test_req.py
+test_req.json
